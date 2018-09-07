@@ -1,5 +1,5 @@
 # go_oauth_phabricator
-Phabricator API with OAuth2 in Golang
+Client for OAuth2 Phabricator in Golang
 
 Installation and Usage
 =============
