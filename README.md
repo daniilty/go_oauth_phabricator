@@ -39,7 +39,7 @@ func init() {
 
 	//phabricatorURL the url of the phabricator server
 	// that is the source of OAuth
-	phabricatorURL := "https://phabricator.exapmle.ru"
+	phabricatorURL := "https://phabricator.example.com"
 
 	client = phabricator.ClientConfig(oauthPHID, oauthSecret, redirectURL, phabricatorURL)
 }
