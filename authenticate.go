@@ -74,8 +74,6 @@ func (c *Config) Authenticate(code string) (User, error) {
 		return user, fmt.Errorf("c.token: %w", err)
 	}
 
-	user.AccessToken = token.AccessToken
-
 	body, err := c.body(token)
 	if err != nil {
 		return user, fmt.Errorf("c.body: %w", err)
@@ -85,6 +83,8 @@ func (c *Config) Authenticate(code string) (User, error) {
 	if err != nil {
 		return user, fmt.Errorf("c.unmarshal: %w", err)
 	}
+
+	user.AccessToken = token.AccessToken
 
 	return user, nil
 }

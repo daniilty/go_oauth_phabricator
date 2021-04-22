@@ -33,6 +33,7 @@ func (c *Config) body(token *oauth2.Token) ([]byte, error) {
 	authClient := c.oauth.Client(context.Background(), token)
 
 	getClientInfoURL := c.phabricatorURL + "/api/user.whoami?access_token=" + token.AccessToken
+
 	authResponse, err := authClient.Get(getClientInfoURL)
 	if err != nil {
 		return []byte{}, fmt.Errorf("authClient.Get: %w", err)
@@ -54,7 +55,7 @@ func (c *Config) unmarshal(body []byte) (User, error) {
 	}
 
 	if resp.ErrorCode != "" {
-		return resp.Result, fmt.Errorf("can't find user info: %w", resp.ErrorInfo)
+		return resp.Result, fmt.Errorf("can't find user info: %s", resp.ErrorInfo)
 	}
 
 	return resp.Result, nil
