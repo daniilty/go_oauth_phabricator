@@ -2,6 +2,8 @@
 package phabricator
 
 import (
+	"fmt"
+
 	"golang.org/x/oauth2"
 )
 
@@ -30,6 +32,7 @@ type User struct {
 	URI          string   `json:"uri"`
 	Roles        []string `json:"roles"`
 	PrimaryEmail string   `json:"primaryEmail"`
+	AccessToken  string   `json:"-"`
 }
 
 // ClientConfig сreates a pointer to the structure Config
@@ -68,15 +71,22 @@ func (c *Config) Authenticate(code string) (User, error) {
 
 	token, err := c.token(code)
 	if err != nil {
-		return user, err
+		return user, fmt.Errorf("c.token: %w", err)
 	}
+
+	user.AccessToken = token.AccessToken
 
 	body, err := c.body(token)
 	if err != nil {
-		return user, err
+		return user, fmt.Errorf("c.body: %w", err)
 	}
 
-	return c.unmarshal(body)
+	user, err = c.unmarshal(body)
+	if err != nil {
+		return user, fmt.Errorf("c.unmarshal: %w", err)
+	}
+
+	return user, nil
 }
 
 // AuthCodeURL returns a URL to OAuth 2.0 provider's consent page
