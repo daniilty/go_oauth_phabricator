@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"log"
 
-	phabricator "github.com/Megaputer/go_oauth_phabricator"
+	phabricator "github.com/daniilty/go_oauth_phabricator"
 )
 
 var client *phabricator.Config
