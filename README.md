@@ -7,7 +7,7 @@ Installation and Usage
 
 Install
 ---------------
-    go get -v github.com/Megaputer/go_oauth_phabricator
+    go get -v github.com/daniilty/go_oauth_phabricator
 
 Usage
 ---------------
